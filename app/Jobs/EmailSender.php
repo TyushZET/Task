@@ -30,13 +30,18 @@ class EmailSender implements ShouldQueue
      */
     public function handle(): void
     {
-        $subscribers = Subscriber::where('website_id', 3)->get();
+        $subscribers = Subscriber::where('website_id', 7)->get();
 
         foreach ($subscribers as $subscriber) {
             $email = $subscriber['email'];
-        }
-        $post = Post::OrderBy('id', 'DESC')->first();
+            $startOfCurrentHour = now()->subHour()->startOfHour()->toDateTimeString();
+            $endOfCurrentHour = now()->subHour()->endofHour()->toDateTimeString();
 
-        Mail::to($email)->send(new MessageSender($post));
+            $posts = Post::whereBetween('created_at', [$startOfCurrentHour, $endOfCurrentHour])->get();
+
+            foreach ($posts as $post) {
+                Mail::to($email)->send(new MessageSender($post));
+            }
+        }
     }
 }

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Post;
+use App\Models\Website;
+use Database\Factories\PostFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,8 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        \App\Models\Post::factory(20)->create();
-//        \App\Models\Subscriber::factory(20)->create();
+//        Post::factory(25)->create();
+//        \App\Models\Subscriber::factory(25)->create();
+//        Website::factory(30)->create();
 
     }
 }

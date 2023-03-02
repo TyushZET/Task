@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Website>
  */
-class PostFactory extends Factory
+class WebsiteFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +18,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->company(),
-            'description' => $this->faker->text(),
-            'website_id' => random_int(1,9),
+            'url' => $this->faker->url(),
         ];
     }
 }
