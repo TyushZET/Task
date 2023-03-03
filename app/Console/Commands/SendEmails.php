@@ -34,6 +34,5 @@ class SendEmails extends Command
     {
         dispatch(new EmailSender());
         $this->warn('The email send successfuly');
-
     }
 }

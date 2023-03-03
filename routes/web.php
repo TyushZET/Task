@@ -20,6 +20,7 @@ Route::get('/home', function () {
 });
 
 
+
 //Route::get('/email', [PostController::class, 'show']);
 
 //Route::get('/posts',[PostController::class,'index']);
