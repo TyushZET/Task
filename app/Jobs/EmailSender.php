@@ -31,7 +31,7 @@ class EmailSender implements ShouldQueue
     public function handle(): void
     {
 
-        $subscribers = Subscriber::where('website_id', 13)->get();
+        $subscribers = Subscriber::where('website_id', 26)->get();
 
         foreach ($subscribers as $subscriber) {
             $email = $subscriber['email'];

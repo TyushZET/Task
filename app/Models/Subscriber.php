@@ -16,4 +16,10 @@ class Subscriber extends Model
         'email',
         'website_id',
     ];
+
+//    public function posts(){
+//        return $this->belongsToMany(Post::class);
+//
+//    }
+
 }

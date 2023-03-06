@@ -9,6 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
+
     protected $table = 'posts';
 
     protected $fillable = [
@@ -16,4 +17,7 @@ class Post extends Model
         'description',
         'website_id',
     ];
+
 }
+
+

@@ -17,9 +17,8 @@ class SubscriberFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => random_int(1,9),
             'email' => $this->faker->email(),
-            'website_id' => random_int(1,9),
+            'website_id' => random_int(1,25),
         ];
     }
 }

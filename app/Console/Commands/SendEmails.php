@@ -6,6 +6,7 @@ use App\Jobs\EmailSender;
 use App\Mail\Message;
 use App\Mail\MessageSender;
 use App\Models\Post;
+use App\Models\SendedEmails;
 use Illuminate\Console\Command;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\Mail;
