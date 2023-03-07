@@ -3,10 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Jobs\EmailSender;
-use App\Mail\Message;
 use App\Mail\MessageSender;
 use App\Models\Post;
-use App\Models\SendedEmails;
+use App\Models\SendedEmail;
 use Illuminate\Console\Command;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\Mail;
@@ -34,6 +33,6 @@ class SendEmails extends Command
     public function handle(): void
     {
         dispatch(new EmailSender());
-        $this->warn('The email send successfuly');
     }
+
 }

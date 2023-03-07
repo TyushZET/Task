@@ -63,4 +63,22 @@ class PostController extends Controller
         }
     }
 
+    public function show($id){
+        $post = Post::findOrFail($id);
+        if($post){
+            $data = [
+                'status' => 200,
+                'posts' => $post,
+            ];
+            return response()->json($data, 200);
+        }else{
+            $data = [
+                'status' => 404,
+                'posts' => 'No records found'
+            ];
+
+        }
+
+    }
+
 }
