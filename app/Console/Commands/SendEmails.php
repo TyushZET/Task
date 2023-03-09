@@ -6,9 +6,11 @@ use App\Jobs\EmailSender;
 use App\Mail\MessageSender;
 use App\Models\Post;
 use App\Models\SendedEmail;
+use App\Models\Website;
 use Illuminate\Console\Command;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\Mail;
+use mysql_xdevapi\Collection;
 
 
 class SendEmails extends Command
@@ -32,7 +34,7 @@ class SendEmails extends Command
      */
     public function handle(): void
     {
+        $this->info("Starting to dispatch job");
         dispatch(new EmailSender());
     }
-
 }

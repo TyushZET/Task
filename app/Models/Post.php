@@ -18,6 +18,16 @@ class Post extends Model
         'website_id',
     ];
 
+    public function subscribers()
+    {
+        return $this->hasMany(Subscriber::class, 'website_id');
+    }
+
+    public function website()
+    {
+        return $this->belongsTo(Website::class);
+    }
+
 }
 
 

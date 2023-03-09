@@ -15,4 +15,9 @@ class Website extends Model
         'title',
         'url',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

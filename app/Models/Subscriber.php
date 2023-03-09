@@ -12,14 +12,13 @@ class Subscriber extends Model
     protected $table = 'subscribers';
 
     protected $fillable = [
-        'user_id',
         'email',
         'website_id',
     ];
 
-//    public function posts(){
-//        return $this->belongsToMany(Post::class);
-//
-//    }
+    public function posts(){
+        return $this->hasMany(Post::class, 'website_id');
+
+    }
 
 }

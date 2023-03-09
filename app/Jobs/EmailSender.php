@@ -32,35 +32,24 @@ class EmailSender implements ShouldQueue
      */
     public function handle(): void
     {
-        $subscribers = Subscriber::where('website_id', 27)->get();
-
-        foreach ($subscribers as $subscriber) {
-            $email = $subscriber['email'];
-            $sub_id = $subscriber['id'];
-
-            $startOfCurrentHour = now()->startOfHour()->toDateTimeString();
-            $endOfCurrentHour = now()->endofHour()->toDateTimeString();
-
-            $posts = Post::whereBetween('created_at', [$startOfCurrentHour, $endOfCurrentHour])->get();
-
-            foreach ($posts as $post) {
-                $post_id = $post['id'];
-
-                $sendedEmails = SendedEmail::all();
-                foreach ($sendedEmails as $sended) {
-                    $sendedPost = $sended['post_id'];
-                    $sendedUser = $sended['user_id'];
+        $sentPostsId = SendedEmail::all()->pluck('post_id');
+        Post::whereNotIn('id', $sentPostsId)
+            ->with('subscribers')
+            ->chunk(2, function ($posts) {
+                foreach ($posts as $post) {
+                    $subscribers = Subscriber::where('website_id', $post->website_id)->get();
+                    foreach ($subscribers as $subscriber) {
+                        Mail::to($subscriber->email)->send(new MessageSender($post));
+                        SendedEmail::create([
+                            'user_id' => $subscriber->id,
+                            'post_id' => $post->id,
+                        ]);
+                    }
                 }
-            }
-        }
-        if ($sendedPost != $post_id) {
-            Mail::to($email)->send(new MessageSender($post));
-            SendedEmail::create([
-                'user_id' => $sub_id,
-                'post_id' => $post_id,
-            ]);
-        } else {
-            echo 'This mail are already sended';
-        }
+            });
+
+
+
     }
+
 }

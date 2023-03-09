@@ -31,7 +31,7 @@ class MessageSender extends Mailable
     {
         return new Envelope(
             subject: 'New post uploaded come check this!',
-            from: 'task@inbound.devmail.email',
+            from: 'test@gmail.com',
         );
     }
 
