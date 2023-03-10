@@ -9,16 +9,14 @@ class Subscriber extends Model
 {
     use HasFactory;
 
-    protected $table = 'subscribers';
-
     protected $fillable = [
         'email',
         'website_id',
     ];
 
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany(Post::class, 'website_id');
 
     }
-
 }
