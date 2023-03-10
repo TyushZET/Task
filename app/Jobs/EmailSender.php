@@ -22,9 +22,13 @@ class EmailSender implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public Post $post;
+    public  Subscriber $subscriber;
+
+    public function __construct($subscriber,$post)
     {
-        //
+        $this->subscriber = $subscriber;
+        $this->post = $post;
     }
 
     /**
@@ -32,23 +36,11 @@ class EmailSender implements ShouldQueue
      */
     public function handle(): void
     {
-        $sentPostsId = SendedEmail::all()->pluck('post_id');
-        Post::whereNotIn('id', $sentPostsId)
-            ->with('subscribers')
-            ->chunk(2, function ($posts) {
-                foreach ($posts as $post) {
-                    $subscribers = Subscriber::where('website_id', $post->website_id)->get();
-                    foreach ($subscribers as $subscriber) {
-                        Mail::to($subscriber->email)->send(new MessageSender($post));
-                        SendedEmail::create([
-                            'user_id' => $subscriber->id,
-                            'post_id' => $post->id,
-                        ]);
-                    }
-                }
-            });
-
-
+        Mail::to($this->subscriber->email)->send(new MessageSender($this->post));
+        SendedEmail::create([
+            'user_id' => $this->subscriber->id,
+            'post_id' => $this->post->id,
+        ]);
 
     }
 

@@ -34,7 +34,18 @@ class SendEmails extends Command
      */
     public function handle(): void
     {
-        $this->info("Starting to dispatch job");
-        dispatch(new EmailSender());
+        $this->info("Sending to subscribers");
+
+        $sentPostsId = SendedEmail::all()->pluck('post_id');
+        Post::whereNotIn('id', $sentPostsId)
+            ->with('subscribers')
+            ->chunk(2, function ($posts) {
+                foreach ($posts as $post) {
+                    $subscribers = Subscriber::where('website_id', $post->website_id)->get();
+                    foreach ($subscribers as $subscriber) {
+                        dispatch(new EmailSender($subscriber,$post));
+                    }
+                }
+            });
     }
 }
