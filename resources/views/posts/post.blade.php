@@ -11,25 +11,29 @@
     <title>Document</title>
 </head>
 <body>
-<form   action="{{route('add_posts')}}" method="post" id="addPostForm">
+<form action="{{route('add_posts')}}" method="post" id="addPostForm">
     @csrf
+    <div class="errMsg">
+
+    </div>
     <div class="mb-3">
         <label class="form-label">Title</label>
         <input type="text" class="form-control" name="title" id="title">
     </div>
     <div class="mb-3">
-        <label  class="form-label">Description</label>
+        <label class="form-label">Description</label>
         <input type="text" class="form-control" name="description" id="description">
     </div>
     <div class="mb-3">
-        <label  class="form-label">Website</label>
+        <label class="form-label">Website</label>
         <input type="number" class="form-control" name="website_id" id="website_id">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -39,22 +43,23 @@
 </script>
 <script>
     $(document).ready(function () {
-            $(document).on('click','.add_posts',function(e){
-                e.preventDefault();
-                let title = $('#title').val();
-                let description = $('#description').val();
-                let website_id = $('#website_id').val();
-            })
+        $(document).on('click', '.add_posts', function (e) {
+            e.preventDefault();
+            let title = $('#title').val();
+            let description = $('#description').val();
+            let website_id = $('#website_id').val();
+        })
         $.ajax({
-            url:{{route('add_posts')}},
-            method:'post',
-            data:{title:title,description:description,website_id:website_id},
-            success:function (res) {
+            url: {{route('add_posts')}},
+            method: 'post',
+            data: {title: title, description: description, website_id: website_id},
+            success: function (res) {
 
-            },error:function (err) {
+            },
+            error: function (err) {
                 let error = err.responseJSON;
-                $.each(error.errors,function (index,value) {
-                        $('errMsg').append('<span class="text-danger">'+value+'</span>'+'<br>');
+                $.each(error.errors, function (index, value) {
+                    $('.errMsg').append('<span class="text-danger">' + value + '</span>' + '<br>');
                 })
             }
         })

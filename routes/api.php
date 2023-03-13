@@ -22,13 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('posts')->group(function (){
     Route::get('', [PostController::class,'index']);
     Route::get('{id}', [PostController::class,'show']);
-    Route::post('/store', [PostController::class,'store']);
+    Route::post('/store', [PostController::class,'store'])->name('add_posts');
 });
 
 
 Route::prefix('subscribers')->group(function (){
     Route::get('', [SubscriberController::class, 'index']);
-    Route::post('/store', [SubscriberController::class, 'store']);
+    Route::post('/store', [SubscriberController::class, 'store'])->name('add_subscriber');
 
 });
 

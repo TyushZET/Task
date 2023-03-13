@@ -27,9 +27,6 @@ Route::get('/subscribers', function () {
     return view('posts.subscribers');
 });
 
-Route::post('/posts/add', [PostController::class,'store'])->name('add_posts');
-
-Route::post('/subscriber/add', [SubscriberController::class,'store'])->name('add_subscriber');
 
 
 
