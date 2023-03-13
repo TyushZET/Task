@@ -43,7 +43,7 @@ class SendEmails extends Command
                 foreach ($posts as $post) {
                     $subscribers = Subscriber::where('website_id', $post->website_id)->get();
                     foreach ($subscribers as $subscriber) {
-                        dispatch(new EmailSender($subscriber,$post));
+                        dispatch(new EmailSender($subscriber, $post));
                     }
                 }
             });

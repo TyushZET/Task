@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SubscriberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PostController;
 
@@ -19,10 +20,16 @@ Route::get('/home', function () {
 
 });
 
+Route::get('/posts', function () {
+    return view('posts.post');
+});
+Route::get('/subscribers', function () {
+    return view('posts.subscribers');
+});
+
+Route::post('/posts/add', [PostController::class,'store'])->name('add_posts');
+
+Route::post('/subscriber/add', [SubscriberController::class,'store'])->name('add_subscriber');
 
 
-//Route::get('/email', [PostController::class, 'show']);
 
-//Route::get('/posts',[PostController::class,'index']);
-//Route::get('/posts/create',[PostController::class,'create']);
-//Route::post('/posts/store',[PostController::class,'store'])->name('post.store');
