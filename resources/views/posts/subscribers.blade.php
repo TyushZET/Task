@@ -11,20 +11,20 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{route('add_subscriber')}}" method="post" id="addPostForm">
+<form action="" method="post" id="addSubForm">
     @csrf
     <div class="errMsg">
 
     </div>
     <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email" id="email">
+        <input type="email" class="form-control" name="email" id="email" required >
     </div>
     <div class="mb-3">
         <label class="form-label">Website</label>
-        <input type="number" class="form-control" name="website_id" id="website_id">
+        <input type="number" class="form-control" name="website_id" id="website_id" required>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary add_subscriber">Submit</button>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"
@@ -43,19 +43,23 @@
             e.preventDefault();
             let email = $('#email').val();
             let website_id = $('#website_id').val();
-        })
-        $.ajax({
-            url: {{route('add_subscriber')}},
-            method: 'post',
-            data: {email: email, website_id: website_id},
-            success: function (res) {
 
-            }, error: function (err) {
-                let error = err.responseJSON;
-                $.each(error.errors, function (index, value) {
-                    $('errMsg').append('<span class="text-danger">' + value + '</span>' + '<br>');
-                })
-            }
+            $.ajax({
+                url: "/api/subscribers/store",
+                method: 'post',
+                data: {email: email, website_id: website_id},
+                success: function (res) {
+                    if (res.status == 200) {
+                        alert('Success')
+                    }
+                }, error: function (err) {
+                    let error = err.responseJson;
+                    $.each(error.errors, function (index, value) {
+                        $('.errMsgContainer').append('<span class="text-danger">' + value + '</span>' + '<br>')
+                    })
+                }
+
+            })
         })
     })
 </script>
