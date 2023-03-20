@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SendedEmail extends Model
+class SentEmail extends Model
 {
     use HasFactory;
 
@@ -13,4 +13,5 @@ class SendedEmail extends Model
         'user_id',
         'post_id',
     ];
+
 }

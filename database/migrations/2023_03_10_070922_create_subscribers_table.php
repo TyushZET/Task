@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('email');
             $table->unsignedBigInteger('website_id');
             $table->foreign('website_id')->references('id')->on('posts');
+            $table->unique(['email','id']);
         });
     }
 

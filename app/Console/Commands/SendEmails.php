@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Jobs\EmailSender;
 use App\Mail\MessageSender;
 use App\Models\Post;
-use App\Models\SendedEmail;
+use App\Models\SentEmail;
 use App\Models\Website;
 use Illuminate\Console\Command;
 use App\Models\Subscriber;
@@ -36,10 +36,8 @@ class SendEmails extends Command
     {
         $this->info("Sending to subscribers");
 
-        $sentPostsId = SendedEmail::all()->pluck('post_id');
-        Post::whereNotIn('id', $sentPostsId)
-            ->with('subscribers')
-            ->chunk(5, function ($posts) {
+        Post::whereDoesntHave('sentEmails')
+            ->chunk(100, function ($posts) {
                 foreach ($posts as $post) {
                     $subscribers = Subscriber::where('website_id', $post->website_id)->get();
                     foreach ($subscribers as $subscriber) {
@@ -49,3 +47,4 @@ class SendEmails extends Command
             });
     }
 }
+
