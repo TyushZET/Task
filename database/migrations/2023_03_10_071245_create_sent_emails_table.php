@@ -10,11 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('sended_emails', function (Blueprint $table) {
+        Schema::create('sent_emails', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
+            $table->unique(['user_id','post_id']);
 
             $table->foreign('user_id')->references('id')->on('subscribers')
                 ->onDelete('cascade');
@@ -28,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('sended_emails');
+        Schema::dropIfExists('sent_emails');
     }
 };

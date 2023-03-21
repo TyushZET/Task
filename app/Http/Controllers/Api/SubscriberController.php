@@ -12,7 +12,7 @@ class SubscriberController extends Controller
 {
     public function index()
     {
-        $subscriber = Subscriber::all();
+        $subscriber = Subscriber::paginate(5);
         if ($subscriber->count() > 0) {
             $data = [
                 'status' => 200,

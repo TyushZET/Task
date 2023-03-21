@@ -5,7 +5,7 @@ namespace App\Jobs;
 use App\Console\Commands\SendEmails;
 use App\Mail\MessageSender;
 use App\Models\Post;
-use App\Models\SendedEmail;
+use App\Models\SentEmail;
 use App\Models\Subscriber;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -37,7 +37,7 @@ class EmailSender implements ShouldQueue
     public function handle(): void
     {
         Mail::to($this->subscriber->email)->send(new MessageSender($this->post));
-        SendedEmail::create([
+        SentEmail::create([
             'user_id' => $this->subscriber->id,
             'post_id' => $this->post->id,
         ]);

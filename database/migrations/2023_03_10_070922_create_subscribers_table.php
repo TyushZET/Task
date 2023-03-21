@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->string('email');
             $table->unsignedBigInteger('website_id');
+            $table->unique(['id','email']);
             $table->foreign('website_id')->references('id')->on('posts');
         });
     }

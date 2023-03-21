@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post = Post::all();
+        $post = Post::paginate(5);
         if ($post->count() > 0) {
             $data = [
                 'status' => 200,
