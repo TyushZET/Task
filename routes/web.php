@@ -19,6 +19,10 @@ Route::get('/home', function () {
     return view('welcome');
 
 });
+Route::get('/js', function () {
+    return view('js');
+
+});
 
 Route::get('/posts', function () {
     return view('posts.post');

@@ -12,7 +12,7 @@ class SubscriberController extends Controller
 {
     public function index()
     {
-        $subscriber = Subscriber::paginate(5);
+        $subscriber = Subscriber::simplePaginate();
         if ($subscriber->count() > 0) {
             $data = [
                 'status' => 200,
@@ -22,7 +22,7 @@ class SubscriberController extends Controller
         } else {
             $data = [
                 'status' => 404,
-                'message' => 'No records found',
+                'message' => 'No subscribers found',
             ];
             return response($data);
         }
@@ -37,12 +37,6 @@ class SubscriberController extends Controller
                 'status' => 200,
                 'message' => 'You subscribed to website successfuly',
             ]);
-        } else {
-            return response()->json([
-                'status' => 500,
-                'message' => 'Something get wrong',
-            ]);
-
         }
     }
 

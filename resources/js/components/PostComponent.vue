@@ -2,9 +2,6 @@
     <div>
         545454
     </div>
-    <post-component>
-        444
-    </post-component>
 </template>
 
 <script>

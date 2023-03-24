@@ -37,7 +37,8 @@ class SendEmails extends Command
         $this->info("Sending to subscribers");
 
         Post::whereDoesntHave('sentEmails')
-            ->chunk(100, function ($posts) {
+            ->orderBy('id')
+            ->chunkById(100, function ($posts) {
                 foreach ($posts as $post) {
                     $subscribers = Subscriber::where('website_id', $post->website_id)->get();
                     foreach ($subscribers as $subscriber) {

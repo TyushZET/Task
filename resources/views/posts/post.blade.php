@@ -12,25 +12,25 @@
 </head>
 <body>
 <div class="form-control">
-<form action="" method="post" id="addPostForm">
-    @csrf
-    <div class="errMsg">
+    <form action="" method="post" id="addPostForm">
+        @csrf
+        <div class="errMsg">
 
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Title</label>
-        <input type="text" class="form-control" name="title" id="title" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Description</label>
-        <input type="text" class="form-control" name="description" id="description" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Website</label>
-        <input type="number" min="1" class="form-control" name="website_id" id="website_id" required>
-    </div>
-    <button type="submit" class="btn btn-primary add_posts">Submit</button>
-</form>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" name="description" id="description" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Website</label>
+            <input type="number" min="1" class="form-control" name="website_id" id="website_id" required>
+        </div>
+        <button type="submit" class="btn btn-primary add_posts">Submit</button>
+    </form>
 </div>
 
 
@@ -73,7 +73,6 @@
         })
     })
 </script>
-
 
 
 </body>

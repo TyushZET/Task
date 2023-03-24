@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post = Post::paginate(5);
+        $post = Post::simplePaginate();
         if ($post->count() > 0) {
             $data = [
                 'status' => 200,
@@ -23,9 +23,9 @@ class PostController extends Controller
         } else {
             $data = [
                 'status' => 404,
-                'posts' => 'No records found'
+                'message' => 'No records found',
             ];
-
+            return response($data);
         }
 
     }
@@ -58,14 +58,7 @@ class PostController extends Controller
                 'posts' => $post,
             ];
             return response()->json($data, 200);
-        } else {
-            $data = [
-                'status' => 404,
-                'posts' => 'No records found'
-            ];
-
         }
-
     }
 
 
