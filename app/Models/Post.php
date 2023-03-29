@@ -28,8 +28,9 @@ class Post extends Model
         return $this->belongsTo(Website::class);
     }
 
-    public function sentEmails(){
-        return $this->hasMany(SentEmail::class);
+    public function sent_emails()
+    {
+        return $this->hasMany(SentEmail::class)->where('sent', 0);
     }
 
 }

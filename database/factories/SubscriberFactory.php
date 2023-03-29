@@ -18,7 +18,7 @@ class SubscriberFactory extends Factory
     {
         return [
             'email' => $this->faker->email(),
-            'website_id' => random_int(1,25),
+            'website_id' => 1,
         ];
     }
 }

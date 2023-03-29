@@ -10,7 +10,6 @@ use App\Models\Website;
 use Illuminate\Console\Command;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\Mail;
-use mysql_xdevapi\Collection;
 
 
 class SendEmails extends Command
@@ -34,17 +33,25 @@ class SendEmails extends Command
      */
     public function handle(): void
     {
-        $this->info("Sending to subscribers");
+        $this->info("Sending posts to subscribers");
 
-        Post::whereDoesntHave('sentEmails')
+
+        Post::whereDoesntHave('sent_emails')
+            ->with('subscribers', function($q){
+                $q->whereDoesntHave('sent_emails');
+            })
             ->orderBy('id')
             ->chunkById(100, function ($posts) {
                 foreach ($posts as $post) {
-                    $subscribers = Subscriber::where('website_id', $post->website_id)->get();
+                    $subscribers = Subscriber::where('website_id', $post->website_id)
+                        ->whereDoesntHave('sent_emails')
+                        ->get();
                     foreach ($subscribers as $subscriber) {
-                        dispatch(new EmailSender($subscriber, $post));
+                        dispatch_sync(new EmailSender($subscriber, $post));
                     }
                 }
             });
     }
 }
+
+

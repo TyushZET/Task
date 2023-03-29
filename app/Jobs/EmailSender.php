@@ -37,9 +37,10 @@ class EmailSender implements ShouldQueue
     public function handle(): void
     {
         Mail::to($this->subscriber->email)->send(new MessageSender($this->post));
-        SentEmail::create([
+        SentEmail::updateOrcreate([
             'user_id' => $this->subscriber->id,
             'post_id' => $this->post->id,
+            'sent' => 1,
         ]);
 
     }

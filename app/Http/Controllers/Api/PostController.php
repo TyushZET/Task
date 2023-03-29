@@ -57,8 +57,8 @@ class PostController extends Controller
                 'status' => 200,
                 'posts' => $post,
             ];
-            return response()->json($data, 200);
         }
+        return response()->json($data);
     }
 
 

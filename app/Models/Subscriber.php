@@ -19,4 +19,11 @@ class Subscriber extends Model
         return $this->hasMany(Post::class, 'website_id');
 
     }
+
+    public function sent_emails()
+    {
+        return $this->hasMany(SentEmail::class,'user_id')->where('sent',1);
+
+    }
+
 }

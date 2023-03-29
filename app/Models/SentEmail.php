@@ -12,5 +12,11 @@ class SentEmail extends Model
     protected $fillable = [
         'user_id',
         'post_id',
+        'sent'
     ];
+
+    public function subscribers()
+    {
+        return $this->hasMany(Subscriber::class, 'id');
+    }
 }

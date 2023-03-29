@@ -10,6 +10,12 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        display: none;
+    }
+</style>
 <body>
 <form action="" method="post" id="addSubForm">
     @csrf
@@ -22,7 +28,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Website</label>
-        <input type="number" class="form-control" name="website_id" id="website_id" required>
+        <input type="number" class="form-control" name="website_id" id="website_id" required style="">
     </div>
     <button type="submit" class="btn btn-primary add_subscriber">Submit</button>
 </form>
